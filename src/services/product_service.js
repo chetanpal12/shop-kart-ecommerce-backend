@@ -18,11 +18,17 @@ class ProductService {
         }
     }
     
-    async getProducts() {
+    async getProducts(query) {
         try {
-            const response = await this.respository.getProducts();
+            if(isNaN(query.limit) || isNaN(query.offset)) {
+                throw new BadRequest("limit, offset", true);
+            }
+            const response = await this.respository.getProducts(+query.limit, +query.offset);
             return response;
         } catch(error) {
+            if(error.name === "BadRequest") {
+                throw error;
+            }
             console.log("ProductService: ",error);
             throw new InternalServerError();
         }
