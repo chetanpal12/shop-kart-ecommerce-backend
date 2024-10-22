@@ -7,9 +7,14 @@ function pingCheckV2(request, response) {
     return response.json({message: 'OK from V2 API'});
 }
 
+function pingAuthCheck(request, response) {
+    return response.json({message: 'OK'});
+}
+
 
 
 module.exports = {
     pingCheck,
-    pingCheckV2
+    pingCheckV2,
+    pingAuthCheck
 }
