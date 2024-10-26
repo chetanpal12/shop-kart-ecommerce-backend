@@ -1,7 +1,8 @@
 const { StatusCodes, ReasonPhrases } = require("http-status-codes");
+
 class UnauthorizedError extends Error {
-    constructor() {
-        const errorMessage = 'Invalid login credentials passed, please try again with correct credentials!';
+    constructor(message) {
+        const errorMessage = (message) ? message : 'Invalid login credentials passed, please try again with correct credentials!';
         super(errorMessage);
         this.statusCode = StatusCodes.UNAUTHORIZED;
         this.reason = ReasonPhrases.UNAUTHORIZED;
@@ -9,4 +10,5 @@ class UnauthorizedError extends Error {
         this.name = "UnauthorizedError";
     }
 }
+
 module.exports = UnauthorizedError;
